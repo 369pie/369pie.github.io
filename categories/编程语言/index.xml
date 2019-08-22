@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程语言 on valar morghulis</title>
+    <link>https://efvhi.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in 编程语言 on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 12 Aug 2019 18:15:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rust Macro</title>
+      <link>https://efvhi.github.io/post/rust-macro/</link>
+      <pubDate>Mon, 12 Aug 2019 18:15:52 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-macro/</guid>
+      <description>宏与函数的区别  从根本上来说，宏是一种为写其他代码而写代码的方式，即所谓的 元编程（metaprogramming）。元编程对于减少大量编写和维护的代码是非常有用的，它也扮演了函数的角色。但宏有一些函数所没有的附加能力。
+一个函数标签必须声明函数参数个数和类型。相比之下，宏只接受一个可变参数：用一个参数调用 println!(&amp;ldquo;hello&amp;rdquo;) 或用两个参数调用 println!(&amp;ldquo;hello {}&amp;rdquo;, name) 。而且，宏可以在编译器翻译代码前展开，例如，宏可以在一个给定类型上实现 trait 。因为函数是在运行时被调用，同时 trait 需要在运行时实现，所以函数无法像宏这样。
+实现一个宏而不是函数的消极面是宏定义要比函数定义更复杂，因为你正在编写生成 Rust 代码的 Rust 代码。由于这样的间接性，宏定义通常要比函数定义更难阅读、理解以及维护。</description>
+    </item>
+    
+    <item>
+      <title>Rust Match</title>
+      <link>https://efvhi.github.io/post/rust-match/</link>
+      <pubDate>Mon, 08 Apr 2019 18:07:30 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-match/</guid>
+      <description>rust 的 match 初看类似 switch，但是提供了更加强大的功能.
+简单例子 enum Coin { Penny, Nickel, Dime, Quarter, } fn value_in_cents(coin: Coin) -&amp;gt; u32 { match coin { Coin::Penny =&amp;gt; 1, Coin::Nickel =&amp;gt; 5, Coin::Dime =&amp;gt; 10, Coin::Quarter =&amp;gt; 25, } }  提供模式匹配 struct Point { x: i64, y: i64, } let point = Point { x: 0, y: 0 }; match point { Point { x, y } =&amp;gt; println!</description>
+    </item>
+    
+    <item>
+      <title>Go Channel Select 使用</title>
+      <link>https://efvhi.github.io/post/go-channel-selet/</link>
+      <pubDate>Wed, 20 Mar 2019 17:46:44 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-channel-selet/</guid>
+      <description>同步模式 channel 默认为同步模式，即不创建缓冲区，发送和接收需要一一配对，不然发送方会被一直阻塞，直到数据被接收。需要注意的是，同步的 channel 不能在一个协程中发送&amp;amp;接收，因为会被阻塞而永远跑不到接收的语句。
+package main import &amp;quot;fmt&amp;quot; func main() { data := make(chan int) go func() { for d := range data {//通过range不断地处理data fmt.</description>
+    </item>
+    
+    <item>
+      <title>Go Goroutine</title>
+      <link>https://efvhi.github.io/post/goroutine/</link>
+      <pubDate>Mon, 21 Jan 2019 18:51:34 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/goroutine/</guid>
+      <description>Goroutine是Go里的一种轻量级线程——协程。相对线程，协程的优势就在于它非常轻量级，进行上下文切换的代价非常的小。对于一个goroutine ,每个结构体G中有一个sched的属性就是用来保存它上下文的。这样，goroutine 就可以很轻易的来回切换。由于其上下文切换在用户态下发生，根本不必进入内核态，所以速度很快。而且只有当前goroutine 的 PC, SP等少量信息需要保存。 在Go语言中，每一个并发的执行单元为一个goroutine。当我们开始运行一个Go程序时，它的入口函数 main 实际上就是运行在一个goroutine 里。
+调度器sheduler 每个goroutine的运行都是由Go语言里的调度器(scheduler）决定的。 先说操作系统的线程调度。在POSIX 中有一个sheduler的内核函数，每过几ms会被执行一次。每次执行时，会挂起当前执行线程，同时保存它寄存器中信息，接着查看线程列表决定下一个线程的运行， 从内存中必复其寄存器信息和现场并开始执行。不同线程之间存在上下文切换，这包括保存一个用户线程的状态到内存，恢复另一个线程的信息到寄存器，同时还要更新sheduler相关的数据结构。这些操作都很耗时。 Go 语言的Runtime有自己的sheduler，通过它我们可以在n个操作系统的线程上调度m个goroutine。实际上Go 的sheduler与操作系统的sheduler是非常相似的，只不过它只关心goroutine的调度。与操作系统sheduler不同的是，Go的sheduler不使用硬件定时器，当一个goroutine 调用了time.Sleep、触发一个channel 操作或者使用 mutex， scheduler 会使这个 goroutine 进行睡眠，进而去唤醒另外一个goroutine，这种调度方式没有上下文之间的切换，它的代价比操作系统的线程调度要小得多。 Go的调度的实现，涉及到几个重要的数据结构。运行时库用这几个数据结构来实现goroutine的调度，管理goroutine和物理线程的运行。这些数据结构分别是结构体G，结构体M，结构体P，以及 Sched 结构体。这三个结构定义在文件 runtime/runtime.</description>
+    </item>
+    
+    <item>
+      <title>Python Gil</title>
+      <link>https://efvhi.github.io/post/python-gil/</link>
+      <pubDate>Wed, 15 Aug 2018 23:03:35 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-gil/</guid>
+      <description>GIL  In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once.</description>
+    </item>
+    
+    <item>
+      <title>Rust的内存管理</title>
+      <link>https://efvhi.github.io/post/rust-mem-management/</link>
+      <pubDate>Sun, 25 Mar 2018 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-mem-management/</guid>
+      <description>Rust 声称自己实现了非常先进的内存管理机制，不需要垃圾回收（GC）或者引用计数（RC）就可以“静态”的管理内存的分配和释放。我觉得内存的分配和释放（如果要及时释放的话），本身是一个动态的过程，无法用静态分析来实现。
+Rust 有一些炫酷的 move semantics, borrowing, lifetime 之类的概念，但是这些概念让语言变得更加复杂，可能并不能从根本上解决内存管理问题。
+Rust 说过你可能需要 &amp;ldquo; fight with the borrow checker &amp;ldquo;。为了通过这些检查，你要用诡异的方式来写程序，随着问题复杂度的增加，就要求有更怪异的写法。如果用了 lifetime, 一个简单代码看起来就会是这样, 写出来后语法肉眼看上去相当复杂</description>
+    </item>
+    
+    <item>
+      <title>Python函数式编程</title>
+      <link>https://efvhi.github.io/post/python-function_programming/</link>
+      <pubDate>Sun, 20 Mar 2016 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-function_programming/</guid>
+      <description>高阶函数 map &amp;gt;&amp;gt;&amp;gt; def f(x): ... return x * x ... &amp;gt;&amp;gt;&amp;gt; r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9]) &amp;gt;&amp;gt;&amp;gt; list(r) [1, 4, 9, 16, 25, 36, 49, 64, 81]  reduce &amp;gt;&amp;gt;&amp;gt; from functools import reduce &amp;gt;&amp;gt;&amp;gt; def fn(x, y): .</description>
+    </item>
+    
+  </channel>
+</rss>

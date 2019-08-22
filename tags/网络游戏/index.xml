@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络游戏 on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%B8%E6%88%8F/</link>
+    <description>Recent content in 网络游戏 on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 21 Apr 2019 14:49:37 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%B8%E6%88%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>网络游戏的同步</title>
+      <link>https://efvhi.github.io/post/sync-in-game/</link>
+      <pubDate>Sun, 21 Apr 2019 14:49:37 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/sync-in-game/</guid>
+      <description>概述 多人实时联机游戏中最重要的问题，所有客户端的表现（数据 (动作、状态) ）需要一致。将游戏大致分为 mmorpg 和 moba 类型分析选用不同的解决方案，《冒险岛》、《魔兽世界》采用的是 mmorpg 适用的状态同步，《王者荣耀》、《绝地求生》使用的帧同步。不过在实际实现的过程可能会有特殊的一些处理，混合一些方案来对反外挂和优化体验作出折中。状态同步和帧同步其实各有优缺点，并不是某一项方案一定能够取代另一项方案，弱交互不涉及多人同屏或者是《炉石传说》一类的游戏采用状态同步的方式就能满足需求了，当游戏类型对实时性要求很高时（比如，实时格斗、体育竞技类游戏（NBA2K）），帧同步可能就是最好的方案了。
+常用解决方案 对比 状态同步 游戏逻辑均在服务端进行处理运算，再将结果再广播给相关客户端。服务端的计算量大、客户端只需要接收对应数据做好刷新。 重点 是要做好 差异更新，也就是某一类数据不必要采用全量数据发送给客户端进行同步（如背包物品数据）。至于模式基本是 req/resp, pub/sub 模式.</description>
+    </item>
+    
+  </channel>
+</rss>

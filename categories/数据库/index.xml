@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on valar morghulis</title>
+    <link>https://efvhi.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 20 Nov 2018 21:50:33 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Elasticsearch 索引设计</title>
+      <link>https://efvhi.github.io/post/elasticsearch-index-design/</link>
+      <pubDate>Tue, 20 Nov 2018 21:50:33 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/elasticsearch-index-design/</guid>
+      <description>索引设计 此处索引设计指宏观方面的索引组织方式，即怎样把数据组织到不同的索引，需要以什么粒度建立索引，不涉及如何设计索引的 mapping。
+按照时间周期组织索引 如果查询中有大量的关于时间范围的查询，分析下自己的查询时间周期，尽量按照周期（小时、日、周、月）去组织索引，一般的日志系统和监控系统都符合此场景。 按照日期组织索引，不但可以减少查询时参与的 shard 数量，而且对于按照周期的数据老化、备份、删除的处理也很方便，基本上相当于文件级的操作性能。 这里有必要提一下 delete_by_query，这种数据老化方式性能慢，而且执行后，底层并不一定会释放磁盘空间，后期 merge 也会有很大的性能损耗，对正常业务影响巨大。
+拆分索引 检查查询语句的 filter 情况，如果业务上有大量的查询是基于一个字段 filter，比如 protocol，而该字段的值是有限的几个值，比如 HTTP、DNS、TCP、UDP 等，最好把这个索引拆成多个索引。 这样每次查询语句中就可以去掉 filter 条件，只针对相对较小的索引，查询性能会有很大提高。同时，如果需要查询跨协议的数据，也可以在查询中指定多个索引来实现。</description>
+    </item>
+    
+  </channel>
+</rss>

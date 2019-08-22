@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/web/</link>
+    <description>Recent content in web on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 10 Jan 2019 19:01:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Web Gin 框架</title>
+      <link>https://efvhi.github.io/post/go-web-gin/</link>
+      <pubDate>Thu, 10 Jan 2019 19:01:09 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-web-gin/</guid>
+      <description>gin 的设计模式 gin的设计模式比较简单（相对于复杂的参考python的django和flask基础进行设计的beego来说，少了MVC的设计思路指导，也不会严格区分model，controller，router等）。
+gin 的核心功能  http请求的 Context 上下文
+ 基础的 auth 认证模块
+ 带颜色的 logger 模块
+ 运行模式 mode 设定</description>
+    </item>
+    
+  </channel>
+</rss>

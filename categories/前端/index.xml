@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前端 on valar morghulis</title>
+    <link>https://efvhi.github.io/categories/%E5%89%8D%E7%AB%AF/</link>
+    <description>Recent content in 前端 on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 20 Apr 2019 21:06:51 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>React Context Api</title>
+      <link>https://efvhi.github.io/post/react-context-api/</link>
+      <pubDate>Sat, 20 Apr 2019 21:06:51 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/react-context-api/</guid>
+      <description>最新版 React Context API 官方释义
+ The vast majority of applications do not need to use context.
+If you want your application to be stable, don’t use context.</description>
+    </item>
+    
+  </channel>
+</rss>

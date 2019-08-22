@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>valar morghulis</title>
+    <link>https://efvhi.github.io/</link>
+    <description>Recent content on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 12 Aug 2019 18:15:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rust Macro</title>
+      <link>https://efvhi.github.io/post/rust-macro/</link>
+      <pubDate>Mon, 12 Aug 2019 18:15:52 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-macro/</guid>
+      <description>宏与函数的区别  从根本上来说，宏是一种为写其他代码而写代码的方式，即所谓的 元编程（metaprogramming）。元编程对于减少大量编写和维护的代码是非常有用的，它也扮演了函数的角色。但宏有一些函数所没有的附加能力。
+一个函数标签必须声明函数参数个数和类型。相比之下，宏只接受一个可变参数：用一个参数调用 println!(&amp;ldquo;hello&amp;rdquo;) 或用两个参数调用 println!(&amp;ldquo;hello {}&amp;rdquo;, name) 。而且，宏可以在编译器翻译代码前展开，例如，宏可以在一个给定类型上实现 trait 。因为函数是在运行时被调用，同时 trait 需要在运行时实现，所以函数无法像宏这样。
+实现一个宏而不是函数的消极面是宏定义要比函数定义更复杂，因为你正在编写生成 Rust 代码的 Rust 代码。由于这样的间接性，宏定义通常要比函数定义更难阅读、理解以及维护。</description>
+    </item>
+    
+    <item>
+      <title>[C]THE MONEY OF SOUL AND POSSIBILITY CONTROL</title>
+      <link>https://efvhi.github.io/post/money-of-soul/</link>
+      <pubDate>Sat, 10 Aug 2019 16:05:00 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/money-of-soul/</guid>
+      <description>现在 还是 有着无尽可能的未来 更重要？
+背景概述 「金融街」, 是一个由 Midas 银行管理的虚拟异空间，它以现实社会中人们的未来为依托而存在。对应现实中每一个大的金融区都有一条金融街，共有 10 个。每一个金融街中心都矗立着一个「Midas 印钞机」 能够吸收现实社会中人们的未来，以此印刷出希冀的金钱，即「Midas 币」。Midas 币会流入现实社会中，与实际货币混在一起正常使用。由于金融街外的人们无法分辨，从而实现金融街对现实社会的影响（控制）。
+不管是普通人还是国家层面其实都在透支未来，肆意透支的结果就是欲望无限放大, 伴随而来的基本是惨痛的结局。</description>
+    </item>
+    
+    <item>
+      <title>区块链共识算法和普通数据库共识算法的差异</title>
+      <link>https://efvhi.github.io/post/pow-pos-dpos-paxos-raft/</link>
+      <pubDate>Fri, 21 Jun 2019 22:45:14 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/pow-pos-dpos-paxos-raft/</guid>
+      <description>拜占庭将军问题  一组拜占庭将军分别各率领一支军队共同围困一座城市。为了简化问题，将各支军队的行动策略限定为进攻或撤离两种。因为部分军队进攻部分军队撤离可能会造成灾难性后果，因此各位将军必须通过投票来达成一致策略，即所有军队一起进攻或所有军队一起撤离。因为各位将军分处城市不同方向，他们只能通过信使互相联系。在投票过程中每位将军都将自己投票给进攻还是撤退的信息通过信使分别通知其他所有将军，这样一来每位将军根据自己的投票和其他所有将军送来的信息就可以知道共同的投票结果而决定行动策略。
+系统的问题在于，将军中可能出现叛徒，他们不仅可能向较为糟糕的策略投票，还可能选择性地发送投票信息。假设有9位将军投票，其中1名叛徒。8名忠诚的将军中出现了4人投进攻，4人投撤离的情况。这时候叛徒可能故意给4名投进攻的将领送信表示投票进攻，而给4名投撤离的将领送信表示投撤离。这样一来在4名投进攻的将领看来，投票结果是5人投进攻，从而发起进攻；而在4名投撤离的将军看来则是5人投撤离。这样各支军队的一致协同就遭到了破坏。
+由于将军之间需要通过信使通讯，叛变将军可能通过伪造信件来以其他将军的身份发送假投票。而即使在保证所有将军忠诚的情况下，也不能排除信使被敌人截杀，甚至被敌人间谍替换等情况。因此很难通过保证人员可靠性及通讯可靠性来解决问题。
+假使那些忠誠（或是沒有出錯）的將軍仍然能通過多數決定來決定他們的戰略，便稱達到了拜占庭容错。在此，票都會有一個預設值，若訊息（票）沒有被收到，則使用此預設值來投票。
+上述的故事對映到計算機系統裡，將軍便成了計算機，而信差就是通訊系統。雖然上述的問題涉及了電子化的決策支援與資訊安全，卻沒辦法單純的用密碼學與數位簽章來解決。因為电路错误仍可能影響整個加密過程，這不是密碼學與數位簽章演算法在解決的問題。因此計算機就有可能將錯誤的結果送出去，亦可能導致錯誤的決策。
+ 上述引用自 wiki。
+paxos, raft, pow, pos, dpos&amp;hellip; 无论是 Paxos 还是 Raft 其实都只能解决非拜占庭将军容错的一致性问题，不能够应对分布式网络中出现的极端情况，但是这在传统的分布式系统都不是什么问题，无论是分布式数据库还是消息队列集群，它们内部的节点并不会故意的发送错误信息，在类似系统中，最常见的问题就是节点失去响应或者失效，所以它们在这种前提下是有效可行的，也是充分的。</description>
+    </item>
+    
+    <item>
+      <title>Ipfs Dht 分布式哈希表</title>
+      <link>https://efvhi.github.io/post/ipfs-dht/</link>
+      <pubDate>Sun, 02 Jun 2019 12:17:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/ipfs-dht/</guid>
+      <description>分布式哈希表 哈希表把所有的东西都存储在一台机器上，当这台机器坏掉了之后，所存储的东西就全部消失了。分布式哈希表可以把一整张哈希表分成若干个不同的部分，分别存储在不同的机器上，这样就降低了数据全部被损坏的风险。
+分布式哈希表通常采用一致性哈希函数来对机器和数据进行统一运算。对机器（通常是其IP地址）和数据（通常是其KEY值）进行统一的运算，把他们全都映射到一个地址空间中。假设有一个一致性哈希函数可以把一个值映射到32bit的地址空间中，从0一直到2^32 – 1。我们用一个圆环来表示这个地址空间。
+假设有N台机器，那么hash()就会把这N台机器映射到这个环的N个地方。然后我们把整个地址空间进行一下划分，使每台机器控制一个范围的地址空间。这样，当我们向这个系统中添加数据的时候，首先使用hash()函数计算一下这个数据的index，然后找出它所对应的地址在环中属于哪个地址范围，我们就可以把这个数据放到相应的机器上。这样，就把一个哈希表分布到了不同的机器上。如下图所示：
+这里蓝色的圆点表示机器，红色的圆点表示某个数据经过hash()计算后所得出的地址。
+在这个图中，按照逆时针方向，每个机器占据的地址范围为从本机器开始一直到下一个机器为止。用顺时针方向来看，每个机器所占据的地址范围为这台机器之前的这一段地址空间。图中的虚线表示数据会存储在哪台机器上。
+IPFS 貌似用的是 dht 的变种 Kademlia DHT  KAD网络对DHT有较大改进，一个新来的网络节点在初次连接到网络时会分配到一个ID，每个节点自身维护一个路由表和一个DHT，路由表保存网络中一部分节点的连接信息，DHT则用于存放文件信息。从上可以看出，KAD由两部分组成：
+ 路由表 DHT  细节过于复杂没空研究</description>
+    </item>
+    
+    <item>
+      <title>分布式协议 Paxos Raft</title>
+      <link>https://efvhi.github.io/post/distributed-protol-paxos-raft/</link>
+      <pubDate>Sun, 26 May 2019 22:13:27 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/distributed-protol-paxos-raft/</guid>
+      <description>谈分布式协议 先把 CAP 原则祭出来.
+ Consistency 一致性、 Availability 高可用性、 Partition tolerance 分区容错性  分布式系统中只能满足其中两项，这是 由CAP 理论得出的结论。
+Paxos 在 paxos 算法中，分为 4 种角色：</description>
+    </item>
+    
+    <item>
+      <title>Go Mircro - 架构与微服务的设计模式</title>
+      <link>https://efvhi.github.io/post/go-mircro-design/</link>
+      <pubDate>Tue, 21 May 2019 19:09:47 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-mircro-design/</guid>
+      <description>微服务 微服务其实是业务 模块化 的概念, 类似于编程的时候把一个业务 函数 模块化一样。
+micro 中各种基础组件  Go Micro 是一个用 golang 编写的，插件化的 RPC 框架。它提供了基础的库，比如服务发现、客户端负载均衡、编解码、同步异步通信等。 Micro API 是一个 API 网关，用于将外部的 HTTP 请求路由到内部的 micro 服务上。它有单一的接入点，可以通过反向代理或者 http 转换成 RPC 来访问。 Micro Web 是一个 web 仪表盘，也是作为 micro web 应用的反向代理。我们相信 web 应用也应该是一个微服务，在微服务世界里也应该是第一等公民。它表现的很像 Micro API 但也有单独的特性比如 websocket。 Micro Sidecar 使用 http 服务，提供了 go-micro 的所有特性。虽然我们喜欢 golang 来构建微服务，但你也许想使用其他语言。所以 Sidecar 提供了一种其他语言的应用接入 Micro 世界的方式。 Micro CLI 是一个简单直接的命令行接口，用于与你的服务交互。他也可以使用你的 Sidecar 作为代理来连接服务。  API + GRPC + 注册发现 http 请求 + grpc 内部服务互相通讯 是连接 客户端 和 各种微服务的方式, 其中微服务相互进行数据交换离不开服务的注册和发现，如 consul， 提供 dns、负载均衡等等功能.</description>
+    </item>
+    
+    <item>
+      <title>IPFS 文件存储备份的问题</title>
+      <link>https://efvhi.github.io/post/ipfs-files-storage/</link>
+      <pubDate>Sun, 12 May 2019 12:12:31 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/ipfs-files-storage/</guid>
+      <description>IPFS网络上同样的文件只有一份 IPFS本质上就是为了解决文件过度冗余问题。如果把人们都有的某个文件，做一次hash计算，只字不差的两个文件hash值相同。哪怕改动一个字，都是一个新版本，hash值都不同。只需要使用相同的hash值，就可以访问那个文件，这个hash值就是文件的地址。这个IPFS网络上同样的hash对应的文件只会保存一份。
+IPFS系统可靠，但是有很小概率可能会造成用户文件的丢失 ipfs 上文件永久丢失的可能性非常低，如果持续付费的话，理论上只要还有节点存在文件就可以永久保存。
+IPFS系统采用了的冗余备份技术是Erasure coding，简单讲：n份原始数据，增加m份校验数据，此时可以通过 n+m份数据中的任意n份数据来恢复原始数据，也就是可容忍的最大失效的数据数量为m。例如，如果想容错4个盘，采用n+4模式。传统的 RAID6 允许两个盘失效，对应 EC就是 n+2模式。EC目前在分布式存储上的应用越来越广。 IPFS允许用户指定 f(n, m) 参数n和m，来增加数据存储的安全性，如果想数据存储更加安全，可以采用增加m的方式，当然，这样做所付的费用也就相应的增加，一切取决于用户。 IPFS系统有自动修复存储的功能，如果系统检测到某些数据有丢失，会启动修复，来恢复到原来的n+m模式。IPFS把整个系统的存储统一调度，所以IPFS自带容灾备份功能。</description>
+    </item>
+    
+    <item>
+      <title>网络游戏的同步</title>
+      <link>https://efvhi.github.io/post/sync-in-game/</link>
+      <pubDate>Sun, 21 Apr 2019 14:49:37 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/sync-in-game/</guid>
+      <description>概述 多人实时联机游戏中最重要的问题，所有客户端的表现（数据 (动作、状态) ）需要一致。将游戏大致分为 mmorpg 和 moba 类型分析选用不同的解决方案，《冒险岛》、《魔兽世界》采用的是 mmorpg 适用的状态同步，《王者荣耀》、《绝地求生》使用的帧同步。不过在实际实现的过程可能会有特殊的一些处理，混合一些方案来对反外挂和优化体验作出折中。状态同步和帧同步其实各有优缺点，并不是某一项方案一定能够取代另一项方案，弱交互不涉及多人同屏或者是《炉石传说》一类的游戏采用状态同步的方式就能满足需求了，当游戏类型对实时性要求很高时（比如，实时格斗、体育竞技类游戏（NBA2K）），帧同步可能就是最好的方案了。
+常用解决方案 对比 状态同步 游戏逻辑均在服务端进行处理运算，再将结果再广播给相关客户端。服务端的计算量大、客户端只需要接收对应数据做好刷新。 重点 是要做好 差异更新，也就是某一类数据不必要采用全量数据发送给客户端进行同步（如背包物品数据）。至于模式基本是 req/resp, pub/sub 模式.</description>
+    </item>
+    
+    <item>
+      <title>React Context Api</title>
+      <link>https://efvhi.github.io/post/react-context-api/</link>
+      <pubDate>Sat, 20 Apr 2019 21:06:51 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/react-context-api/</guid>
+      <description>最新版 React Context API 官方释义
+ The vast majority of applications do not need to use context.
+If you want your application to be stable, don’t use context.</description>
+    </item>
+    
+    <item>
+      <title>Rust Match</title>
+      <link>https://efvhi.github.io/post/rust-match/</link>
+      <pubDate>Mon, 08 Apr 2019 18:07:30 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-match/</guid>
+      <description>rust 的 match 初看类似 switch，但是提供了更加强大的功能.
+简单例子 enum Coin { Penny, Nickel, Dime, Quarter, } fn value_in_cents(coin: Coin) -&amp;gt; u32 { match coin { Coin::Penny =&amp;gt; 1, Coin::Nickel =&amp;gt; 5, Coin::Dime =&amp;gt; 10, Coin::Quarter =&amp;gt; 25, } }  提供模式匹配 struct Point { x: i64, y: i64, } let point = Point { x: 0, y: 0 }; match point { Point { x, y } =&amp;gt; println!</description>
+    </item>
+    
+    <item>
+      <title>Go Channel Select 使用</title>
+      <link>https://efvhi.github.io/post/go-channel-selet/</link>
+      <pubDate>Wed, 20 Mar 2019 17:46:44 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-channel-selet/</guid>
+      <description>同步模式 channel 默认为同步模式，即不创建缓冲区，发送和接收需要一一配对，不然发送方会被一直阻塞，直到数据被接收。需要注意的是，同步的 channel 不能在一个协程中发送&amp;amp;接收，因为会被阻塞而永远跑不到接收的语句。
+package main import &amp;quot;fmt&amp;quot; func main() { data := make(chan int) go func() { for d := range data {//通过range不断地处理data fmt.</description>
+    </item>
+    
+    <item>
+      <title>Nikola Tesla 尼古拉 特斯拉</title>
+      <link>https://efvhi.github.io/post/nikola-tesla/</link>
+      <pubDate>Fri, 22 Feb 2019 12:34:06 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/nikola-tesla/</guid>
+      <description>  特斯拉在28岁来到美国，带着介绍信进入爱迪生的公司。次年离开，并建立自己的公司研发多相交流电机以及发电机 34岁到37岁，主要研究是高频电流，最著名的就是特斯拉电圈以及人体接触高频电流的实验 39岁实验室毁于火灾 41岁获得了20项无线电工程技术领域的专利，并研究粒子辐射，建立宇宙射线基本方程 42岁注册无线控制技术，也就是图中提及的遥控器 44到49岁，精力在沃登克里弗塔上，最终没有成功 53岁到66岁，完成机械技术方面的专利，包括泵、流速计、无叶涡轮等，图中的振动器 87岁死于纽约宾馆中  特斯拉  我只是个平凡的人，没有什么特殊的能力。宇宙中的任何一小部分都包含整个宇宙的所有信息，在其中藏着的某个神秘数据库又保存着宇宙的总体信息，我只是很幸运地可以进入这个数据库去获取信息而已
+ </description>
+    </item>
+    
+    <item>
+      <title>Go Goroutine</title>
+      <link>https://efvhi.github.io/post/goroutine/</link>
+      <pubDate>Mon, 21 Jan 2019 18:51:34 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/goroutine/</guid>
+      <description>Goroutine是Go里的一种轻量级线程——协程。相对线程，协程的优势就在于它非常轻量级，进行上下文切换的代价非常的小。对于一个goroutine ,每个结构体G中有一个sched的属性就是用来保存它上下文的。这样，goroutine 就可以很轻易的来回切换。由于其上下文切换在用户态下发生，根本不必进入内核态，所以速度很快。而且只有当前goroutine 的 PC, SP等少量信息需要保存。 在Go语言中，每一个并发的执行单元为一个goroutine。当我们开始运行一个Go程序时，它的入口函数 main 实际上就是运行在一个goroutine 里。
+调度器sheduler 每个goroutine的运行都是由Go语言里的调度器(scheduler）决定的。 先说操作系统的线程调度。在POSIX 中有一个sheduler的内核函数，每过几ms会被执行一次。每次执行时，会挂起当前执行线程，同时保存它寄存器中信息，接着查看线程列表决定下一个线程的运行， 从内存中必复其寄存器信息和现场并开始执行。不同线程之间存在上下文切换，这包括保存一个用户线程的状态到内存，恢复另一个线程的信息到寄存器，同时还要更新sheduler相关的数据结构。这些操作都很耗时。 Go 语言的Runtime有自己的sheduler，通过它我们可以在n个操作系统的线程上调度m个goroutine。实际上Go 的sheduler与操作系统的sheduler是非常相似的，只不过它只关心goroutine的调度。与操作系统sheduler不同的是，Go的sheduler不使用硬件定时器，当一个goroutine 调用了time.Sleep、触发一个channel 操作或者使用 mutex， scheduler 会使这个 goroutine 进行睡眠，进而去唤醒另外一个goroutine，这种调度方式没有上下文之间的切换，它的代价比操作系统的线程调度要小得多。 Go的调度的实现，涉及到几个重要的数据结构。运行时库用这几个数据结构来实现goroutine的调度，管理goroutine和物理线程的运行。这些数据结构分别是结构体G，结构体M，结构体P，以及 Sched 结构体。这三个结构定义在文件 runtime/runtime.</description>
+    </item>
+    
+    <item>
+      <title>Minkube K8S 无法拉取gcr镜像以及设置proxy解决办法</title>
+      <link>https://efvhi.github.io/post/minikube-k8s-proxy/</link>
+      <pubDate>Sat, 19 Jan 2019 23:40:59 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/minikube-k8s-proxy/</guid>
+      <description>Minikube Proxy Minikube 启动的容器拉取 gcr 或者其他墙外的镜像失败之后尝试以下操作:
+ minikube start --docker-env http_proxy=http://192.168.1.100:1087 --docker-env https_proxy=https://192.168.1.100:1087(也可以考虑换成socks5)
+ 启动之后可以使用 minikube ssh 手动docker pull gcr.</description>
+    </item>
+    
+    <item>
+      <title>Go Web Gin 框架</title>
+      <link>https://efvhi.github.io/post/go-web-gin/</link>
+      <pubDate>Thu, 10 Jan 2019 19:01:09 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-web-gin/</guid>
+      <description>gin 的设计模式 gin的设计模式比较简单（相对于复杂的参考python的django和flask基础进行设计的beego来说，少了MVC的设计思路指导，也不会严格区分model，controller，router等）。
+gin 的核心功能  http请求的 Context 上下文
+ 基础的 auth 认证模块
+ 带颜色的 logger 模块
+ 运行模式 mode 设定</description>
+    </item>
+    
+    <item>
+      <title>Elasticsearch 索引设计</title>
+      <link>https://efvhi.github.io/post/elasticsearch-index-design/</link>
+      <pubDate>Tue, 20 Nov 2018 21:50:33 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/elasticsearch-index-design/</guid>
+      <description>索引设计 此处索引设计指宏观方面的索引组织方式，即怎样把数据组织到不同的索引，需要以什么粒度建立索引，不涉及如何设计索引的 mapping。
+按照时间周期组织索引 如果查询中有大量的关于时间范围的查询，分析下自己的查询时间周期，尽量按照周期（小时、日、周、月）去组织索引，一般的日志系统和监控系统都符合此场景。 按照日期组织索引，不但可以减少查询时参与的 shard 数量，而且对于按照周期的数据老化、备份、删除的处理也很方便，基本上相当于文件级的操作性能。 这里有必要提一下 delete_by_query，这种数据老化方式性能慢，而且执行后，底层并不一定会释放磁盘空间，后期 merge 也会有很大的性能损耗，对正常业务影响巨大。
+拆分索引 检查查询语句的 filter 情况，如果业务上有大量的查询是基于一个字段 filter，比如 protocol，而该字段的值是有限的几个值，比如 HTTP、DNS、TCP、UDP 等，最好把这个索引拆成多个索引。 这样每次查询语句中就可以去掉 filter 条件，只针对相对较小的索引，查询性能会有很大提高。同时，如果需要查询跨协议的数据，也可以在查询中指定多个索引来实现。</description>
+    </item>
+    
+    <item>
+      <title>Python Flask</title>
+      <link>https://efvhi.github.io/post/python-flask/</link>
+      <pubDate>Tue, 21 Aug 2018 23:02:07 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-flask/</guid>
+      <description>falsk 基本遵从 mvc 架构
+flask-demo/ ├ run.py # 应用启动程序 ├ config.py # 环境配置 ├ requirements.txt # 列出应用程序依赖的所有Python包 ├ tests/ # 测试代码包 │ ├ __init__.</description>
+    </item>
+    
+    <item>
+      <title>《禁闭岛》</title>
+      <link>https://efvhi.github.io/post/jinbidao/</link>
+      <pubDate>Mon, 20 Aug 2018 16:36:16 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/jinbidao/</guid>
+      <description>有时候 并不是我们看到所以相信，而是我们相信所以看到
+Scorsese宝刀未老，借二战题材反映当代美国问题，也许是最聪明的选择。电影最后“Teddy”为什么对“Chuck”说那些”I can&amp;rsquo;t stop thinking, do I want to live forever and being treated as a monster, or die as a good saint?</description>
+    </item>
+    
+    <item>
+      <title>Python Gil</title>
+      <link>https://efvhi.github.io/post/python-gil/</link>
+      <pubDate>Wed, 15 Aug 2018 23:03:35 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-gil/</guid>
+      <description>GIL  In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once.</description>
+    </item>
+    
+    <item>
+      <title>Rust的内存管理</title>
+      <link>https://efvhi.github.io/post/rust-mem-management/</link>
+      <pubDate>Sun, 25 Mar 2018 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-mem-management/</guid>
+      <description>Rust 声称自己实现了非常先进的内存管理机制，不需要垃圾回收（GC）或者引用计数（RC）就可以“静态”的管理内存的分配和释放。我觉得内存的分配和释放（如果要及时释放的话），本身是一个动态的过程，无法用静态分析来实现。
+Rust 有一些炫酷的 move semantics, borrowing, lifetime 之类的概念，但是这些概念让语言变得更加复杂，可能并不能从根本上解决内存管理问题。
+Rust 说过你可能需要 &amp;ldquo; fight with the borrow checker &amp;ldquo;。为了通过这些检查，你要用诡异的方式来写程序，随着问题复杂度的增加，就要求有更怪异的写法。如果用了 lifetime, 一个简单代码看起来就会是这样, 写出来后语法肉眼看上去相当复杂</description>
+    </item>
+    
+    <item>
+      <title>Pos Dpos Pow</title>
+      <link>https://efvhi.github.io/post/pos-dpos-pow/</link>
+      <pubDate>Wed, 21 Feb 2018 19:21:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/pos-dpos-pow/</guid>
+      <description>pow 工作量证明机制, 用cpu/gpu 计算随机数、谁算出来了谁获得奖励.
+pos 股权证明机制, 能否获得记账权，取决于代币持有量的多少.
+dpos 股份授权证明机制, 多个代表记账机制, 人人都有投票权利.
+总结 哪个好 ？ 看起来 dpos 很美好， 但 中本聪 大佬的 pow 可能更胜一筹，不过也得看用来做哪方面的事情了（所谓的跟业务场景相关）。</description>
+    </item>
+    
+    <item>
+      <title>Python函数式编程</title>
+      <link>https://efvhi.github.io/post/python-function_programming/</link>
+      <pubDate>Sun, 20 Mar 2016 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-function_programming/</guid>
+      <description>高阶函数 map &amp;gt;&amp;gt;&amp;gt; def f(x): ... return x * x ... &amp;gt;&amp;gt;&amp;gt; r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9]) &amp;gt;&amp;gt;&amp;gt; list(r) [1, 4, 9, 16, 25, 36, 49, 64, 81]  reduce &amp;gt;&amp;gt;&amp;gt; from functools import reduce &amp;gt;&amp;gt;&amp;gt; def fn(x, y): .</description>
+    </item>
+    
+    <item>
+      <title>使用CreateRemoteThread把代码远程注入指定exe执行</title>
+      <link>https://efvhi.github.io/post/createremotethread/</link>
+      <pubDate>Fri, 20 Nov 2015 10:05:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/createremotethread/</guid>
+      <description>远程注入 exe 做的这个例子首先是创建了一个 MFC 对话框程序，然后自己创建了一个 带有导出函数 （简单的减法） 的 DLL ， 这个 Calc 按键就是调用自己 DLL 里面的减法函数 计算 1 - 1， 其次创建一个拥有能够修改进程中某函数的入口代码功能的 DLL（为什么是 DLL，网上有大量详细的资料，）， 然后我们还创建一个 windows 控制台程序 也就是 调用 CreateRemoteThread 让 Calc 加载我们准备好的 DLL（修改函数入口代码）， 因为 DLL 被加载时我们可以在 DLLMain 中指定要执行的代码。</description>
+    </item>
+    
+    <item>
+      <title>python使用smtplib库和smtp.qq.com邮件服务器发送邮件</title>
+      <link>https://efvhi.github.io/post/python-smtp-mailsending/</link>
+      <pubDate>Sun, 20 Sep 2015 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-smtp-mailsending/</guid>
+      <description>使用 qq 的邮件服务器需要注意的两个地方主要是:
+ 验证消息是否内部一致； 验证所有前提条件是否有效； 修改应用程序状态。  SMTP/POP3 服务。然后用 qq 手机安全中心扫一扫会给一个授权码, 在代码中要填写的密码是这个 授权码， 而不是邮箱密码！
+#coding:utf8 from smtplib import SMTP_SSL from email.</description>
+    </item>
+    
+  </channel>
+</rss>

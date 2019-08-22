@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K8S on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/k8s/</link>
+    <description>Recent content in K8S on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 19 Jan 2019 23:40:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Minkube K8S 无法拉取gcr镜像以及设置proxy解决办法</title>
+      <link>https://efvhi.github.io/post/minikube-k8s-proxy/</link>
+      <pubDate>Sat, 19 Jan 2019 23:40:59 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/minikube-k8s-proxy/</guid>
+      <description>Minikube Proxy Minikube 启动的容器拉取 gcr 或者其他墙外的镜像失败之后尝试以下操作:
+ minikube start --docker-env http_proxy=http://192.168.1.100:1087 --docker-env https_proxy=https://192.168.1.100:1087(也可以考虑换成socks5)
+ 启动之后可以使用 minikube ssh 手动docker pull gcr.</description>
+    </item>
+    
+  </channel>
+</rss>

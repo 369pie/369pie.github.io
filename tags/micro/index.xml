@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>micro on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/micro/</link>
+    <description>Recent content in micro on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 21 May 2019 19:09:47 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/micro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Mircro - 架构与微服务的设计模式</title>
+      <link>https://efvhi.github.io/post/go-mircro-design/</link>
+      <pubDate>Tue, 21 May 2019 19:09:47 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-mircro-design/</guid>
+      <description>微服务 微服务其实是业务 模块化 的概念, 类似于编程的时候把一个业务 函数 模块化一样。
+micro 中各种基础组件  Go Micro 是一个用 golang 编写的，插件化的 RPC 框架。它提供了基础的库，比如服务发现、客户端负载均衡、编解码、同步异步通信等。 Micro API 是一个 API 网关，用于将外部的 HTTP 请求路由到内部的 micro 服务上。它有单一的接入点，可以通过反向代理或者 http 转换成 RPC 来访问。 Micro Web 是一个 web 仪表盘，也是作为 micro web 应用的反向代理。我们相信 web 应用也应该是一个微服务，在微服务世界里也应该是第一等公民。它表现的很像 Micro API 但也有单独的特性比如 websocket。 Micro Sidecar 使用 http 服务，提供了 go-micro 的所有特性。虽然我们喜欢 golang 来构建微服务，但你也许想使用其他语言。所以 Sidecar 提供了一种其他语言的应用接入 Micro 世界的方式。 Micro CLI 是一个简单直接的命令行接口，用于与你的服务交互。他也可以使用你的 Sidecar 作为代理来连接服务。  API + GRPC + 注册发现 http 请求 + grpc 内部服务互相通讯 是连接 客户端 和 各种微服务的方式, 其中微服务相互进行数据交换离不开服务的注册和发现，如 consul， 提供 dns、负载均衡等等功能.</description>
+    </item>
+    
+  </channel>
+</rss>

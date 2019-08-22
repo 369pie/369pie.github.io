@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>共识算法 on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 共识算法 on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 21 Jun 2019 22:45:14 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>区块链共识算法和普通数据库共识算法的差异</title>
+      <link>https://efvhi.github.io/post/pow-pos-dpos-paxos-raft/</link>
+      <pubDate>Fri, 21 Jun 2019 22:45:14 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/pow-pos-dpos-paxos-raft/</guid>
+      <description>拜占庭将军问题  一组拜占庭将军分别各率领一支军队共同围困一座城市。为了简化问题，将各支军队的行动策略限定为进攻或撤离两种。因为部分军队进攻部分军队撤离可能会造成灾难性后果，因此各位将军必须通过投票来达成一致策略，即所有军队一起进攻或所有军队一起撤离。因为各位将军分处城市不同方向，他们只能通过信使互相联系。在投票过程中每位将军都将自己投票给进攻还是撤退的信息通过信使分别通知其他所有将军，这样一来每位将军根据自己的投票和其他所有将军送来的信息就可以知道共同的投票结果而决定行动策略。
+系统的问题在于，将军中可能出现叛徒，他们不仅可能向较为糟糕的策略投票，还可能选择性地发送投票信息。假设有9位将军投票，其中1名叛徒。8名忠诚的将军中出现了4人投进攻，4人投撤离的情况。这时候叛徒可能故意给4名投进攻的将领送信表示投票进攻，而给4名投撤离的将领送信表示投撤离。这样一来在4名投进攻的将领看来，投票结果是5人投进攻，从而发起进攻；而在4名投撤离的将军看来则是5人投撤离。这样各支军队的一致协同就遭到了破坏。
+由于将军之间需要通过信使通讯，叛变将军可能通过伪造信件来以其他将军的身份发送假投票。而即使在保证所有将军忠诚的情况下，也不能排除信使被敌人截杀，甚至被敌人间谍替换等情况。因此很难通过保证人员可靠性及通讯可靠性来解决问题。
+假使那些忠誠（或是沒有出錯）的將軍仍然能通過多數決定來決定他們的戰略，便稱達到了拜占庭容错。在此，票都會有一個預設值，若訊息（票）沒有被收到，則使用此預設值來投票。
+上述的故事對映到計算機系統裡，將軍便成了計算機，而信差就是通訊系統。雖然上述的問題涉及了電子化的決策支援與資訊安全，卻沒辦法單純的用密碼學與數位簽章來解決。因為电路错误仍可能影響整個加密過程，這不是密碼學與數位簽章演算法在解決的問題。因此計算機就有可能將錯誤的結果送出去，亦可能導致錯誤的決策。
+ 上述引用自 wiki。
+paxos, raft, pow, pos, dpos&amp;hellip; 无论是 Paxos 还是 Raft 其实都只能解决非拜占庭将军容错的一致性问题，不能够应对分布式网络中出现的极端情况，但是这在传统的分布式系统都不是什么问题，无论是分布式数据库还是消息队列集群，它们内部的节点并不会故意的发送错误信息，在类似系统中，最常见的问题就是节点失去响应或者失效，所以它们在这种前提下是有效可行的，也是充分的。</description>
+    </item>
+    
+  </channel>
+</rss>

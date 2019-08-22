@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GC on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/gc/</link>
+    <description>Recent content in GC on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 25 Mar 2018 10:06:17 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/gc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rust的内存管理</title>
+      <link>https://efvhi.github.io/post/rust-mem-management/</link>
+      <pubDate>Sun, 25 Mar 2018 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-mem-management/</guid>
+      <description>Rust 声称自己实现了非常先进的内存管理机制，不需要垃圾回收（GC）或者引用计数（RC）就可以“静态”的管理内存的分配和释放。我觉得内存的分配和释放（如果要及时释放的话），本身是一个动态的过程，无法用静态分析来实现。
+Rust 有一些炫酷的 move semantics, borrowing, lifetime 之类的概念，但是这些概念让语言变得更加复杂，可能并不能从根本上解决内存管理问题。
+Rust 说过你可能需要 &amp;ldquo; fight with the borrow checker &amp;ldquo;。为了通过这些检查，你要用诡异的方式来写程序，随着问题复杂度的增加，就要求有更怪异的写法。如果用了 lifetime, 一个简单代码看起来就会是这样, 写出来后语法肉眼看上去相当复杂</description>
+    </item>
+    
+  </channel>
+</rss>

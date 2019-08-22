@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/python/</link>
+    <description>Recent content in python on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 15 Aug 2018 23:03:35 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python Gil</title>
+      <link>https://efvhi.github.io/post/python-gil/</link>
+      <pubDate>Wed, 15 Aug 2018 23:03:35 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-gil/</guid>
+      <description>GIL  In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once.</description>
+    </item>
+    
+    <item>
+      <title>Python函数式编程</title>
+      <link>https://efvhi.github.io/post/python-function_programming/</link>
+      <pubDate>Sun, 20 Mar 2016 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-function_programming/</guid>
+      <description>高阶函数 map &amp;gt;&amp;gt;&amp;gt; def f(x): ... return x * x ... &amp;gt;&amp;gt;&amp;gt; r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9]) &amp;gt;&amp;gt;&amp;gt; list(r) [1, 4, 9, 16, 25, 36, 49, 64, 81]  reduce &amp;gt;&amp;gt;&amp;gt; from functools import reduce &amp;gt;&amp;gt;&amp;gt; def fn(x, y): .</description>
+    </item>
+    
+    <item>
+      <title>python使用smtplib库和smtp.qq.com邮件服务器发送邮件</title>
+      <link>https://efvhi.github.io/post/python-smtp-mailsending/</link>
+      <pubDate>Sun, 20 Sep 2015 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-smtp-mailsending/</guid>
+      <description>使用 qq 的邮件服务器需要注意的两个地方主要是:
+ 验证消息是否内部一致； 验证所有前提条件是否有效； 修改应用程序状态。  SMTP/POP3 服务。然后用 qq 手机安全中心扫一扫会给一个授权码, 在代码中要填写的密码是这个 授权码， 而不是邮箱密码！
+#coding:utf8 from smtplib import SMTP_SSL from email.</description>
+    </item>
+    
+  </channel>
+</rss>

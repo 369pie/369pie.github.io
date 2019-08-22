@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rust on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/rust/</link>
+    <description>Recent content in rust on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 12 Aug 2019 18:15:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rust Macro</title>
+      <link>https://efvhi.github.io/post/rust-macro/</link>
+      <pubDate>Mon, 12 Aug 2019 18:15:52 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-macro/</guid>
+      <description>宏与函数的区别  从根本上来说，宏是一种为写其他代码而写代码的方式，即所谓的 元编程（metaprogramming）。元编程对于减少大量编写和维护的代码是非常有用的，它也扮演了函数的角色。但宏有一些函数所没有的附加能力。
+一个函数标签必须声明函数参数个数和类型。相比之下，宏只接受一个可变参数：用一个参数调用 println!(&amp;ldquo;hello&amp;rdquo;) 或用两个参数调用 println!(&amp;ldquo;hello {}&amp;rdquo;, name) 。而且，宏可以在编译器翻译代码前展开，例如，宏可以在一个给定类型上实现 trait 。因为函数是在运行时被调用，同时 trait 需要在运行时实现，所以函数无法像宏这样。
+实现一个宏而不是函数的消极面是宏定义要比函数定义更复杂，因为你正在编写生成 Rust 代码的 Rust 代码。由于这样的间接性，宏定义通常要比函数定义更难阅读、理解以及维护。</description>
+    </item>
+    
+    <item>
+      <title>Rust Match</title>
+      <link>https://efvhi.github.io/post/rust-match/</link>
+      <pubDate>Mon, 08 Apr 2019 18:07:30 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-match/</guid>
+      <description>rust 的 match 初看类似 switch，但是提供了更加强大的功能.
+简单例子 enum Coin { Penny, Nickel, Dime, Quarter, } fn value_in_cents(coin: Coin) -&amp;gt; u32 { match coin { Coin::Penny =&amp;gt; 1, Coin::Nickel =&amp;gt; 5, Coin::Dime =&amp;gt; 10, Coin::Quarter =&amp;gt; 25, } }  提供模式匹配 struct Point { x: i64, y: i64, } let point = Point { x: 0, y: 0 }; match point { Point { x, y } =&amp;gt; println!</description>
+    </item>
+    
+    <item>
+      <title>Rust的内存管理</title>
+      <link>https://efvhi.github.io/post/rust-mem-management/</link>
+      <pubDate>Sun, 25 Mar 2018 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-mem-management/</guid>
+      <description>Rust 声称自己实现了非常先进的内存管理机制，不需要垃圾回收（GC）或者引用计数（RC）就可以“静态”的管理内存的分配和释放。我觉得内存的分配和释放（如果要及时释放的话），本身是一个动态的过程，无法用静态分析来实现。
+Rust 有一些炫酷的 move semantics, borrowing, lifetime 之类的概念，但是这些概念让语言变得更加复杂，可能并不能从根本上解决内存管理问题。
+Rust 说过你可能需要 &amp;ldquo; fight with the borrow checker &amp;ldquo;。为了通过这些检查，你要用诡异的方式来写程序，随着问题复杂度的增加，就要求有更怪异的写法。如果用了 lifetime, 一个简单代码看起来就会是这样, 写出来后语法肉眼看上去相当复杂</description>
+    </item>
+    
+  </channel>
+</rss>

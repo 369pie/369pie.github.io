@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hash on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/hash/</link>
+    <description>Recent content in hash on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 02 Jun 2019 12:17:48 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/hash/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ipfs Dht 分布式哈希表</title>
+      <link>https://efvhi.github.io/post/ipfs-dht/</link>
+      <pubDate>Sun, 02 Jun 2019 12:17:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/ipfs-dht/</guid>
+      <description>分布式哈希表 哈希表把所有的东西都存储在一台机器上，当这台机器坏掉了之后，所存储的东西就全部消失了。分布式哈希表可以把一整张哈希表分成若干个不同的部分，分别存储在不同的机器上，这样就降低了数据全部被损坏的风险。
+分布式哈希表通常采用一致性哈希函数来对机器和数据进行统一运算。对机器（通常是其IP地址）和数据（通常是其KEY值）进行统一的运算，把他们全都映射到一个地址空间中。假设有一个一致性哈希函数可以把一个值映射到32bit的地址空间中，从0一直到2^32 – 1。我们用一个圆环来表示这个地址空间。
+假设有N台机器，那么hash()就会把这N台机器映射到这个环的N个地方。然后我们把整个地址空间进行一下划分，使每台机器控制一个范围的地址空间。这样，当我们向这个系统中添加数据的时候，首先使用hash()函数计算一下这个数据的index，然后找出它所对应的地址在环中属于哪个地址范围，我们就可以把这个数据放到相应的机器上。这样，就把一个哈希表分布到了不同的机器上。如下图所示：
+这里蓝色的圆点表示机器，红色的圆点表示某个数据经过hash()计算后所得出的地址。
+在这个图中，按照逆时针方向，每个机器占据的地址范围为从本机器开始一直到下一个机器为止。用顺时针方向来看，每个机器所占据的地址范围为这台机器之前的这一段地址空间。图中的虚线表示数据会存储在哪台机器上。
+IPFS 貌似用的是 dht 的变种 Kademlia DHT  KAD网络对DHT有较大改进，一个新来的网络节点在初次连接到网络时会分配到一个ID，每个节点自身维护一个路由表和一个DHT，路由表保存网络中一部分节点的连接信息，DHT则用于存放文件信息。从上可以看出，KAD由两部分组成：
+ 路由表 DHT  细节过于复杂没空研究</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>区块链 on valar morghulis</title>
+    <link>https://efvhi.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+    <description>Recent content in 区块链 on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 12 May 2019 12:12:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>IPFS 文件存储备份的问题</title>
+      <link>https://efvhi.github.io/post/ipfs-files-storage/</link>
+      <pubDate>Sun, 12 May 2019 12:12:31 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/ipfs-files-storage/</guid>
+      <description>IPFS网络上同样的文件只有一份 IPFS本质上就是为了解决文件过度冗余问题。如果把人们都有的某个文件，做一次hash计算，只字不差的两个文件hash值相同。哪怕改动一个字，都是一个新版本，hash值都不同。只需要使用相同的hash值，就可以访问那个文件，这个hash值就是文件的地址。这个IPFS网络上同样的hash对应的文件只会保存一份。
+IPFS系统可靠，但是有很小概率可能会造成用户文件的丢失 ipfs 上文件永久丢失的可能性非常低，如果持续付费的话，理论上只要还有节点存在文件就可以永久保存。
+IPFS系统采用了的冗余备份技术是Erasure coding，简单讲：n份原始数据，增加m份校验数据，此时可以通过 n+m份数据中的任意n份数据来恢复原始数据，也就是可容忍的最大失效的数据数量为m。例如，如果想容错4个盘，采用n+4模式。传统的 RAID6 允许两个盘失效，对应 EC就是 n+2模式。EC目前在分布式存储上的应用越来越广。 IPFS允许用户指定 f(n, m) 参数n和m，来增加数据存储的安全性，如果想数据存储更加安全，可以采用增加m的方式，当然，这样做所付的费用也就相应的增加，一切取决于用户。 IPFS系统有自动修复存储的功能，如果系统检测到某些数据有丢失，会启动修复，来恢复到原来的n+m模式。IPFS把整个系统的存储统一调度，所以IPFS自带容灾备份功能。</description>
+    </item>
+    
+    <item>
+      <title>Pos Dpos Pow</title>
+      <link>https://efvhi.github.io/post/pos-dpos-pow/</link>
+      <pubDate>Wed, 21 Feb 2018 19:21:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/pos-dpos-pow/</guid>
+      <description>pow 工作量证明机制, 用cpu/gpu 计算随机数、谁算出来了谁获得奖励.
+pos 股权证明机制, 能否获得记账权，取决于代币持有量的多少.
+dpos 股份授权证明机制, 多个代表记账机制, 人人都有投票权利.
+总结 哪个好 ？ 看起来 dpos 很美好， 但 中本聪 大佬的 pow 可能更胜一筹，不过也得看用来做哪方面的事情了（所谓的跟业务场景相关）。</description>
+    </item>
+    
+  </channel>
+</rss>

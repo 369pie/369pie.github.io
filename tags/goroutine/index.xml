@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goroutine on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/goroutine/</link>
+    <description>Recent content in Goroutine on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 21 Jan 2019 18:51:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/goroutine/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Goroutine</title>
+      <link>https://efvhi.github.io/post/goroutine/</link>
+      <pubDate>Mon, 21 Jan 2019 18:51:34 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/goroutine/</guid>
+      <description>Goroutine是Go里的一种轻量级线程——协程。相对线程，协程的优势就在于它非常轻量级，进行上下文切换的代价非常的小。对于一个goroutine ,每个结构体G中有一个sched的属性就是用来保存它上下文的。这样，goroutine 就可以很轻易的来回切换。由于其上下文切换在用户态下发生，根本不必进入内核态，所以速度很快。而且只有当前goroutine 的 PC, SP等少量信息需要保存。 在Go语言中，每一个并发的执行单元为一个goroutine。当我们开始运行一个Go程序时，它的入口函数 main 实际上就是运行在一个goroutine 里。
+调度器sheduler 每个goroutine的运行都是由Go语言里的调度器(scheduler）决定的。 先说操作系统的线程调度。在POSIX 中有一个sheduler的内核函数，每过几ms会被执行一次。每次执行时，会挂起当前执行线程，同时保存它寄存器中信息，接着查看线程列表决定下一个线程的运行， 从内存中必复其寄存器信息和现场并开始执行。不同线程之间存在上下文切换，这包括保存一个用户线程的状态到内存，恢复另一个线程的信息到寄存器，同时还要更新sheduler相关的数据结构。这些操作都很耗时。 Go 语言的Runtime有自己的sheduler，通过它我们可以在n个操作系统的线程上调度m个goroutine。实际上Go 的sheduler与操作系统的sheduler是非常相似的，只不过它只关心goroutine的调度。与操作系统sheduler不同的是，Go的sheduler不使用硬件定时器，当一个goroutine 调用了time.Sleep、触发一个channel 操作或者使用 mutex， scheduler 会使这个 goroutine 进行睡眠，进而去唤醒另外一个goroutine，这种调度方式没有上下文之间的切换，它的代价比操作系统的线程调度要小得多。 Go的调度的实现，涉及到几个重要的数据结构。运行时库用这几个数据结构来实现goroutine的调度，管理goroutine和物理线程的运行。这些数据结构分别是结构体G，结构体M，结构体P，以及 Sched 结构体。这三个结构定义在文件 runtime/runtime.</description>
+    </item>
+    
+  </channel>
+</rss>

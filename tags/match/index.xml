@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>match on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/match/</link>
+    <description>Recent content in match on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 08 Apr 2019 18:07:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/match/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rust Match</title>
+      <link>https://efvhi.github.io/post/rust-match/</link>
+      <pubDate>Mon, 08 Apr 2019 18:07:30 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/rust-match/</guid>
+      <description>rust 的 match 初看类似 switch，但是提供了更加强大的功能.
+简单例子 enum Coin { Penny, Nickel, Dime, Quarter, } fn value_in_cents(coin: Coin) -&amp;gt; u32 { match coin { Coin::Penny =&amp;gt; 1, Coin::Nickel =&amp;gt; 5, Coin::Dime =&amp;gt; 10, Coin::Quarter =&amp;gt; 25, } }  提供模式匹配 struct Point { x: i64, y: i64, } let point = Point { x: 0, y: 0 }; match point { Point { x, y } =&amp;gt; println!</description>
+    </item>
+    
+  </channel>
+</rss>

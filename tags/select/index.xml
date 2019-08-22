@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>select on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/select/</link>
+    <description>Recent content in select on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 20 Mar 2019 17:46:44 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/select/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Channel Select 使用</title>
+      <link>https://efvhi.github.io/post/go-channel-selet/</link>
+      <pubDate>Wed, 20 Mar 2019 17:46:44 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-channel-selet/</guid>
+      <description>同步模式 channel 默认为同步模式，即不创建缓冲区，发送和接收需要一一配对，不然发送方会被一直阻塞，直到数据被接收。需要注意的是，同步的 channel 不能在一个协程中发送&amp;amp;接收，因为会被阻塞而永远跑不到接收的语句。
+package main import &amp;quot;fmt&amp;quot; func main() { data := make(chan int) go func() { for d := range data {//通过range不断地处理data fmt.</description>
+    </item>
+    
+  </channel>
+</rss>

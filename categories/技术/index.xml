@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术 on valar morghulis</title>
+    <link>https://efvhi.github.io/categories/%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 技术 on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 21 Jun 2019 22:45:14 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>区块链共识算法和普通数据库共识算法的差异</title>
+      <link>https://efvhi.github.io/post/pow-pos-dpos-paxos-raft/</link>
+      <pubDate>Fri, 21 Jun 2019 22:45:14 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/pow-pos-dpos-paxos-raft/</guid>
+      <description>拜占庭将军问题  一组拜占庭将军分别各率领一支军队共同围困一座城市。为了简化问题，将各支军队的行动策略限定为进攻或撤离两种。因为部分军队进攻部分军队撤离可能会造成灾难性后果，因此各位将军必须通过投票来达成一致策略，即所有军队一起进攻或所有军队一起撤离。因为各位将军分处城市不同方向，他们只能通过信使互相联系。在投票过程中每位将军都将自己投票给进攻还是撤退的信息通过信使分别通知其他所有将军，这样一来每位将军根据自己的投票和其他所有将军送来的信息就可以知道共同的投票结果而决定行动策略。
+系统的问题在于，将军中可能出现叛徒，他们不仅可能向较为糟糕的策略投票，还可能选择性地发送投票信息。假设有9位将军投票，其中1名叛徒。8名忠诚的将军中出现了4人投进攻，4人投撤离的情况。这时候叛徒可能故意给4名投进攻的将领送信表示投票进攻，而给4名投撤离的将领送信表示投撤离。这样一来在4名投进攻的将领看来，投票结果是5人投进攻，从而发起进攻；而在4名投撤离的将军看来则是5人投撤离。这样各支军队的一致协同就遭到了破坏。
+由于将军之间需要通过信使通讯，叛变将军可能通过伪造信件来以其他将军的身份发送假投票。而即使在保证所有将军忠诚的情况下，也不能排除信使被敌人截杀，甚至被敌人间谍替换等情况。因此很难通过保证人员可靠性及通讯可靠性来解决问题。
+假使那些忠誠（或是沒有出錯）的將軍仍然能通過多數決定來決定他們的戰略，便稱達到了拜占庭容错。在此，票都會有一個預設值，若訊息（票）沒有被收到，則使用此預設值來投票。
+上述的故事對映到計算機系統裡，將軍便成了計算機，而信差就是通訊系統。雖然上述的問題涉及了電子化的決策支援與資訊安全，卻沒辦法單純的用密碼學與數位簽章來解決。因為电路错误仍可能影響整個加密過程，這不是密碼學與數位簽章演算法在解決的問題。因此計算機就有可能將錯誤的結果送出去，亦可能導致錯誤的決策。
+ 上述引用自 wiki。
+paxos, raft, pow, pos, dpos&amp;hellip; 无论是 Paxos 还是 Raft 其实都只能解决非拜占庭将军容错的一致性问题，不能够应对分布式网络中出现的极端情况，但是这在传统的分布式系统都不是什么问题，无论是分布式数据库还是消息队列集群，它们内部的节点并不会故意的发送错误信息，在类似系统中，最常见的问题就是节点失去响应或者失效，所以它们在这种前提下是有效可行的，也是充分的。</description>
+    </item>
+    
+    <item>
+      <title>Ipfs Dht 分布式哈希表</title>
+      <link>https://efvhi.github.io/post/ipfs-dht/</link>
+      <pubDate>Sun, 02 Jun 2019 12:17:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/ipfs-dht/</guid>
+      <description>分布式哈希表 哈希表把所有的东西都存储在一台机器上，当这台机器坏掉了之后，所存储的东西就全部消失了。分布式哈希表可以把一整张哈希表分成若干个不同的部分，分别存储在不同的机器上，这样就降低了数据全部被损坏的风险。
+分布式哈希表通常采用一致性哈希函数来对机器和数据进行统一运算。对机器（通常是其IP地址）和数据（通常是其KEY值）进行统一的运算，把他们全都映射到一个地址空间中。假设有一个一致性哈希函数可以把一个值映射到32bit的地址空间中，从0一直到2^32 – 1。我们用一个圆环来表示这个地址空间。
+假设有N台机器，那么hash()就会把这N台机器映射到这个环的N个地方。然后我们把整个地址空间进行一下划分，使每台机器控制一个范围的地址空间。这样，当我们向这个系统中添加数据的时候，首先使用hash()函数计算一下这个数据的index，然后找出它所对应的地址在环中属于哪个地址范围，我们就可以把这个数据放到相应的机器上。这样，就把一个哈希表分布到了不同的机器上。如下图所示：
+这里蓝色的圆点表示机器，红色的圆点表示某个数据经过hash()计算后所得出的地址。
+在这个图中，按照逆时针方向，每个机器占据的地址范围为从本机器开始一直到下一个机器为止。用顺时针方向来看，每个机器所占据的地址范围为这台机器之前的这一段地址空间。图中的虚线表示数据会存储在哪台机器上。
+IPFS 貌似用的是 dht 的变种 Kademlia DHT  KAD网络对DHT有较大改进，一个新来的网络节点在初次连接到网络时会分配到一个ID，每个节点自身维护一个路由表和一个DHT，路由表保存网络中一部分节点的连接信息，DHT则用于存放文件信息。从上可以看出，KAD由两部分组成：
+ 路由表 DHT  细节过于复杂没空研究</description>
+    </item>
+    
+    <item>
+      <title>分布式协议 Paxos Raft</title>
+      <link>https://efvhi.github.io/post/distributed-protol-paxos-raft/</link>
+      <pubDate>Sun, 26 May 2019 22:13:27 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/distributed-protol-paxos-raft/</guid>
+      <description>谈分布式协议 先把 CAP 原则祭出来.
+ Consistency 一致性、 Availability 高可用性、 Partition tolerance 分区容错性  分布式系统中只能满足其中两项，这是 由CAP 理论得出的结论。
+Paxos 在 paxos 算法中，分为 4 种角色：</description>
+    </item>
+    
+    <item>
+      <title>Go Mircro - 架构与微服务的设计模式</title>
+      <link>https://efvhi.github.io/post/go-mircro-design/</link>
+      <pubDate>Tue, 21 May 2019 19:09:47 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-mircro-design/</guid>
+      <description>微服务 微服务其实是业务 模块化 的概念, 类似于编程的时候把一个业务 函数 模块化一样。
+micro 中各种基础组件  Go Micro 是一个用 golang 编写的，插件化的 RPC 框架。它提供了基础的库，比如服务发现、客户端负载均衡、编解码、同步异步通信等。 Micro API 是一个 API 网关，用于将外部的 HTTP 请求路由到内部的 micro 服务上。它有单一的接入点，可以通过反向代理或者 http 转换成 RPC 来访问。 Micro Web 是一个 web 仪表盘，也是作为 micro web 应用的反向代理。我们相信 web 应用也应该是一个微服务，在微服务世界里也应该是第一等公民。它表现的很像 Micro API 但也有单独的特性比如 websocket。 Micro Sidecar 使用 http 服务，提供了 go-micro 的所有特性。虽然我们喜欢 golang 来构建微服务，但你也许想使用其他语言。所以 Sidecar 提供了一种其他语言的应用接入 Micro 世界的方式。 Micro CLI 是一个简单直接的命令行接口，用于与你的服务交互。他也可以使用你的 Sidecar 作为代理来连接服务。  API + GRPC + 注册发现 http 请求 + grpc 内部服务互相通讯 是连接 客户端 和 各种微服务的方式, 其中微服务相互进行数据交换离不开服务的注册和发现，如 consul， 提供 dns、负载均衡等等功能.</description>
+    </item>
+    
+    <item>
+      <title>网络游戏的同步</title>
+      <link>https://efvhi.github.io/post/sync-in-game/</link>
+      <pubDate>Sun, 21 Apr 2019 14:49:37 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/sync-in-game/</guid>
+      <description>概述 多人实时联机游戏中最重要的问题，所有客户端的表现（数据 (动作、状态) ）需要一致。将游戏大致分为 mmorpg 和 moba 类型分析选用不同的解决方案，《冒险岛》、《魔兽世界》采用的是 mmorpg 适用的状态同步，《王者荣耀》、《绝地求生》使用的帧同步。不过在实际实现的过程可能会有特殊的一些处理，混合一些方案来对反外挂和优化体验作出折中。状态同步和帧同步其实各有优缺点，并不是某一项方案一定能够取代另一项方案，弱交互不涉及多人同屏或者是《炉石传说》一类的游戏采用状态同步的方式就能满足需求了，当游戏类型对实时性要求很高时（比如，实时格斗、体育竞技类游戏（NBA2K）），帧同步可能就是最好的方案了。
+常用解决方案 对比 状态同步 游戏逻辑均在服务端进行处理运算，再将结果再广播给相关客户端。服务端的计算量大、客户端只需要接收对应数据做好刷新。 重点 是要做好 差异更新，也就是某一类数据不必要采用全量数据发送给客户端进行同步（如背包物品数据）。至于模式基本是 req/resp, pub/sub 模式.</description>
+    </item>
+    
+    <item>
+      <title>Minkube K8S 无法拉取gcr镜像以及设置proxy解决办法</title>
+      <link>https://efvhi.github.io/post/minikube-k8s-proxy/</link>
+      <pubDate>Sat, 19 Jan 2019 23:40:59 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/minikube-k8s-proxy/</guid>
+      <description>Minikube Proxy Minikube 启动的容器拉取 gcr 或者其他墙外的镜像失败之后尝试以下操作:
+ minikube start --docker-env http_proxy=http://192.168.1.100:1087 --docker-env https_proxy=https://192.168.1.100:1087(也可以考虑换成socks5)
+ 启动之后可以使用 minikube ssh 手动docker pull gcr.</description>
+    </item>
+    
+    <item>
+      <title>Go Web Gin 框架</title>
+      <link>https://efvhi.github.io/post/go-web-gin/</link>
+      <pubDate>Thu, 10 Jan 2019 19:01:09 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/go-web-gin/</guid>
+      <description>gin 的设计模式 gin的设计模式比较简单（相对于复杂的参考python的django和flask基础进行设计的beego来说，少了MVC的设计思路指导，也不会严格区分model，controller，router等）。
+gin 的核心功能  http请求的 Context 上下文
+ 基础的 auth 认证模块
+ 带颜色的 logger 模块
+ 运行模式 mode 设定</description>
+    </item>
+    
+    <item>
+      <title>Python Flask</title>
+      <link>https://efvhi.github.io/post/python-flask/</link>
+      <pubDate>Tue, 21 Aug 2018 23:02:07 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-flask/</guid>
+      <description>falsk 基本遵从 mvc 架构
+flask-demo/ ├ run.py # 应用启动程序 ├ config.py # 环境配置 ├ requirements.txt # 列出应用程序依赖的所有Python包 ├ tests/ # 测试代码包 │ ├ __init__.</description>
+    </item>
+    
+    <item>
+      <title>使用CreateRemoteThread把代码远程注入指定exe执行</title>
+      <link>https://efvhi.github.io/post/createremotethread/</link>
+      <pubDate>Fri, 20 Nov 2015 10:05:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/createremotethread/</guid>
+      <description>远程注入 exe 做的这个例子首先是创建了一个 MFC 对话框程序，然后自己创建了一个 带有导出函数 （简单的减法） 的 DLL ， 这个 Calc 按键就是调用自己 DLL 里面的减法函数 计算 1 - 1， 其次创建一个拥有能够修改进程中某函数的入口代码功能的 DLL（为什么是 DLL，网上有大量详细的资料，）， 然后我们还创建一个 windows 控制台程序 也就是 调用 CreateRemoteThread 让 Calc 加载我们准备好的 DLL（修改函数入口代码）， 因为 DLL 被加载时我们可以在 DLLMain 中指定要执行的代码。</description>
+    </item>
+    
+    <item>
+      <title>python使用smtplib库和smtp.qq.com邮件服务器发送邮件</title>
+      <link>https://efvhi.github.io/post/python-smtp-mailsending/</link>
+      <pubDate>Sun, 20 Sep 2015 10:06:17 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/python-smtp-mailsending/</guid>
+      <description>使用 qq 的邮件服务器需要注意的两个地方主要是:
+ 验证消息是否内部一致； 验证所有前提条件是否有效； 修改应用程序状态。  SMTP/POP3 服务。然后用 qq 手机安全中心扫一扫会给一个授权码, 在代码中要填写的密码是这个 授权码， 而不是邮箱密码！
+#coding:utf8 from smtplib import SMTP_SSL from email.</description>
+    </item>
+    
+  </channel>
+</rss>

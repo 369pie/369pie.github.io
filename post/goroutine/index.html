@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.56.3" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Go Goroutine | valar morghulis</title>
+    <meta property="og:title" content="Go Goroutine - valar morghulis">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-01-21T18:51:34&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-01-21T18:51:34&#43;08:00">
+        
+    <meta name="Keywords" content="golang,go语言,go语言笔记,rust,博客,项目管理,python,软件架构,公众号,小程序,区块链">
+    <meta name="description" content="Go Goroutine">
+        
+    <meta name="author" content="efvhi">
+    <meta property="og:url" content="https://efvhi.github.io/post/goroutine/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://efvhi.github.io">
+                        valar morghulis
+                    </a>
+                
+                <p class="description">we r here because we r not free</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://efvhi.github.io">首页</a>
+                    
+                    <a  href="https://efvhi.github.io/books/" title="随笔">随笔</a>
+                    
+                    <a  href="https://efvhi.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://efvhi.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Go Goroutine</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年1月21日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://efvhi.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80">编程语言</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>Goroutine是Go里的一种轻量级线程——协程。相对线程，协程的优势就在于它非常轻量级，进行上下文切换的代价非常的小。对于一个goroutine ,每个结构体G中有一个sched的属性就是用来保存它上下文的。这样，goroutine 就可以很轻易的来回切换。由于其上下文切换在用户态下发生，根本不必进入内核态，所以速度很快。而且只有当前goroutine 的 PC, SP等少量信息需要保存。
+在Go语言中，每一个并发的执行单元为一个goroutine。当我们开始运行一个Go程序时，它的入口函数 main 实际上就是运行在一个goroutine 里。</p>
+
+<h2 id="调度器sheduler">调度器sheduler</h2>
+
+<p>每个goroutine的运行都是由Go语言里的调度器(scheduler）决定的。
+先说操作系统的线程调度。在POSIX 中有一个sheduler的内核函数，每过几ms会被执行一次。每次执行时，会挂起当前执行线程，同时保存它寄存器中信息，接着查看线程列表决定下一个线程的运行， 从内存中必复其寄存器信息和现场并开始执行。不同线程之间存在上下文切换，这包括保存一个用户线程的状态到内存，恢复另一个线程的信息到寄存器，同时还要更新sheduler相关的数据结构。这些操作都很耗时。
+Go 语言的Runtime有自己的sheduler，通过它我们可以在n个操作系统的线程上调度m个goroutine。实际上Go 的sheduler与操作系统的sheduler是非常相似的，只不过它只关心goroutine的调度。与操作系统sheduler不同的是，Go的sheduler不使用硬件定时器，当一个goroutine 调用了time.Sleep、触发一个channel 操作或者使用 mutex， scheduler 会使这个 goroutine 进行睡眠，进而去唤醒另外一个goroutine，这种调度方式没有上下文之间的切换，它的代价比操作系统的线程调度要小得多。
+Go的调度的实现，涉及到几个重要的数据结构。运行时库用这几个数据结构来实现goroutine的调度，管理goroutine和物理线程的运行。这些数据结构分别是结构体G，结构体M，结构体P，以及 Sched 结构体。这三个结构定义在文件 runtime/runtime.h 中，而Sched的定义在 runtime/proc.c 中。在Go语言中scheduler 通过一个GOMAXPROCS变量来决定有多少个操作系统的线程来运行Go程序，默认值为CPU的核心数。</p>
+
+<h2 id="goroutine的特点">Goroutine的特点</h2>
+
+<p>Goroutine是Go Runtime所提供的，并非操作系统层面上支持的，goroutine不是用线程实现的。goroutine就是一段代码，一个函数入口，以及在堆上为其分配的一个堆栈。这个栈通常很小，一般为2kB, 所以它非常廉价，我们可以很轻松的创建上成千万个goroutine，这是很普遍的。Goroutine 的栈大小不是固定的，这一点和操作系统的线程是不一样的，它可以动态的扩展，最大值可达1GB。
+Goroutine是协作式调度的，如果goroutine会执行很长时间，而且不是通过等待读取或写入channel的数据来同步的话，就需要主动调用Gosched()来让出CPU。
+Go语言封装了异步IO，所以可以写出貌似并发数很多的服务端，可即使我们通过调整GOMAXPROCS来充分利用多核CPU并行处理，其效率也不如我们利用IO事件驱动设计的、按照事务类型划分好合适比例的线程池。在响应时间上，协作式调度是硬伤。
+每个goroutine是没有身份标识的，这是为了避免像Thread Local Storage那样被烂用，一个函数的行为不可能由其本身变量决定。
+Goroutine最大的优点是在并发开发中实现了对线程池的动态扩展，不会由于某个任务的阻塞而导致死锁。</p>
+
+<hr />
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/go-web-gin/">Go Web Gin 框架</a></li>
+        
+        <li><a href="/post/minikube-k8s-proxy/">Minkube K8S 无法拉取gcr镜像以及设置proxy解决办法</a></li>
+        
+        <li><a href="/post/elasticsearch-index-design/">Elasticsearch 索引设计</a></li>
+        
+        <li><a href="/post/python-flask/">Python Flask</a></li>
+        
+        <li><a href="/post/jinbidao/">《禁闭岛》</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://efvhi.github.io/tags/go">go</a></li>
+                                
+                                <li><a href="https://efvhi.github.io/tags/goroutine">Goroutine</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://efvhi.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://efvhi.github.io/post/rust-macro/" title="Rust Macro">Rust Macro</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/money-of-soul/" title="[C]THE MONEY OF SOUL AND POSSIBILITY CONTROL">[C]THE MONEY OF SOUL AND POSSIBILITY CONTROL</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/pow-pos-dpos-paxos-raft/" title="区块链共识算法和普通数据库共识算法的差异">区块链共识算法和普通数据库共识算法的差异</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/ipfs-dht/" title="Ipfs Dht 分布式哈希表">Ipfs Dht 分布式哈希表</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/distributed-protol-paxos-raft/" title="分布式协议 Paxos Raft">分布式协议 Paxos Raft</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/go-mircro-design/" title="Go Mircro - 架构与微服务的设计模式">Go Mircro - 架构与微服务的设计模式</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/ipfs-files-storage/" title="IPFS 文件存储备份的问题">IPFS 文件存储备份的问题</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/sync-in-game/" title="网络游戏的同步">网络游戏的同步</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/react-context-api/" title="React Context Api">React Context Api</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/post/rust-match/" title="Rust Match">Rust Match</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://efvhi.github.io/categories/%E5%89%8D%E7%AB%AF/">前端(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/categories/%E6%8A%80%E6%9C%AF/">技术(10)</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言(7)</a>
+    </li>
+    
+    <li>
+        <a href="https://efvhi.github.io/categories/%E9%9A%8F%E7%AC%94/">随笔(3)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://efvhi.github.io/tags/channel/">channel</a>
+    
+    <a href="https://efvhi.github.io/tags/context-api/">context-api</a>
+    
+    <a href="https://efvhi.github.io/tags/cpp/">cpp</a>
+    
+    <a href="https://efvhi.github.io/tags/createremotethread/">createremotethread</a>
+    
+    <a href="https://efvhi.github.io/tags/dpos/">dpos</a>
+    
+    <a href="https://efvhi.github.io/tags/elasticsearch/">elasticsearch</a>
+    
+    <a href="https://efvhi.github.io/tags/gc/">gc</a>
+    
+    <a href="https://efvhi.github.io/tags/gil/">gil</a>
+    
+    <a href="https://efvhi.github.io/tags/go/">go</a>
+    
+    <a href="https://efvhi.github.io/tags/goroutine/">goroutine</a>
+    
+    <a href="https://efvhi.github.io/tags/hash/">hash</a>
+    
+    <a href="https://efvhi.github.io/tags/ipfs/">ipfs</a>
+    
+    <a href="https://efvhi.github.io/tags/k8s/">k8s</a>
+    
+    <a href="https://efvhi.github.io/tags/lambda/">lambda</a>
+    
+    <a href="https://efvhi.github.io/tags/match/">match</a>
+    
+    <a href="https://efvhi.github.io/tags/micro/">micro</a>
+    
+    <a href="https://efvhi.github.io/tags/minikube/">minikube</a>
+    
+    <a href="https://efvhi.github.io/tags/pos/">pos</a>
+    
+    <a href="https://efvhi.github.io/tags/pow/">pow</a>
+    
+    <a href="https://efvhi.github.io/tags/proxy-setting/">proxy-setting</a>
+    
+    <a href="https://efvhi.github.io/tags/python/">python</a>
+    
+    <a href="https://efvhi.github.io/tags/react/">react</a>
+    
+    <a href="https://efvhi.github.io/tags/rust/">rust</a>
+    
+    <a href="https://efvhi.github.io/tags/select/">select</a>
+    
+    <a href="https://efvhi.github.io/tags/smtp/">smtp</a>
+    
+    <a href="https://efvhi.github.io/tags/web/">web</a>
+    
+    <a href="https://efvhi.github.io/tags/windows/">windows</a>
+    
+    <a href="https://efvhi.github.io/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/">共识算法</a>
+    
+    <a href="https://efvhi.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://efvhi.github.io/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a>
+    
+    <a href="https://efvhi.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+    
+    <a href="https://efvhi.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+    
+    <a href="https://efvhi.github.io/tags/%E5%90%8C%E6%AD%A5/">同步</a>
+    
+    <a href="https://efvhi.github.io/tags/%E5%B8%A7%E5%90%8C%E6%AD%A5/">帧同步</a>
+    
+    <a href="https://efvhi.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://efvhi.github.io/tags/%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5/">状态同步</a>
+    
+    <a href="https://efvhi.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%B8%E6%88%8F/">网络游戏</a>
+    
+    <a href="https://efvhi.github.io/tags/%E8%A7%82%E5%90%8E%E6%84%9F/">观后感</a>
+    
+    <a href="https://efvhi.github.io/tags/%E8%BF%9C%E7%A8%8B%E6%B3%A8%E5%85%A5/">远程注入</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://efvhi.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://efvhi.github.io">valar morghulis By efvhi</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

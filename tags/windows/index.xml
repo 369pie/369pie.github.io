@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>windows on valar morghulis</title>
+    <link>https://efvhi.github.io/tags/windows/</link>
+    <description>Recent content in windows on valar morghulis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 20 Nov 2015 10:05:48 +0800</lastBuildDate>
+    
+	<atom:link href="https://efvhi.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用CreateRemoteThread把代码远程注入指定exe执行</title>
+      <link>https://efvhi.github.io/post/createremotethread/</link>
+      <pubDate>Fri, 20 Nov 2015 10:05:48 +0800</pubDate>
+      
+      <guid>https://efvhi.github.io/post/createremotethread/</guid>
+      <description>远程注入 exe 做的这个例子首先是创建了一个 MFC 对话框程序，然后自己创建了一个 带有导出函数 （简单的减法） 的 DLL ， 这个 Calc 按键就是调用自己 DLL 里面的减法函数 计算 1 - 1， 其次创建一个拥有能够修改进程中某函数的入口代码功能的 DLL（为什么是 DLL，网上有大量详细的资料，）， 然后我们还创建一个 windows 控制台程序 也就是 调用 CreateRemoteThread 让 Calc 加载我们准备好的 DLL（修改函数入口代码）， 因为 DLL 被加载时我们可以在 DLLMain 中指定要执行的代码。</description>
+    </item>
+    
+  </channel>
+</rss>
