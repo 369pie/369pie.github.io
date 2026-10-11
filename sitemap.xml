@@ -428,4 +428,40 @@
     <priority>0.5</priority>
   </url>
   
+
+  <url>
+    <loc>https://369pie.github.io/post/agent-platform-secondary-dev/</loc>
+    <lastmod>2026-09-28T00:00:00+08:00</lastmod>
+  </url>
+
+
+  <url>
+    <loc>https://369pie.github.io/post/comfyui-workflow-to-production/</loc>
+    <lastmod>2026-09-15T00:00:00+08:00</lastmod>
+  </url>
+
+
+  <url>
+    <loc>https://369pie.github.io/post/vibe-coding-limits/</loc>
+    <lastmod>2026-08-30T00:00:00+08:00</lastmod>
+  </url>
+
+
+  <url>
+    <loc>https://369pie.github.io/post/llm-observability-cost/</loc>
+    <lastmod>2026-08-12T00:00:00+08:00</lastmod>
+  </url>
+
+
+  <url>
+    <loc>https://369pie.github.io/post/ai-landscape-2026-2028/</loc>
+    <lastmod>2026-07-20T00:00:00+08:00</lastmod>
+  </url>
+
+
+  <url>
+    <loc>https://369pie.github.io/post/open-source-agent-cn-community/</loc>
+    <lastmod>2026-07-05T00:00:00+08:00</lastmod>
+  </url>
+
 </urlset>
