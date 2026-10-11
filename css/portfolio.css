@@ -30,6 +30,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -72,6 +73,82 @@ body::after {
 #footer {
   position: relative;
   z-index: 1;
+}
+
+/* Override Maupassant fixed layout (prevents horizontal scroll) */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+}
+
+@media (min-width: 861px) {
+  #body > .container > .col-group {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  #main.col-8 {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto !important;
+    margin-right: 0 !important;
+    float: none !important;
+  }
+
+  .res-cons {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+
+  #secondary {
+    flex: 0 0 245px;
+    width: 245px !important;
+    float: none !important;
+    display: block !important;
+    margin-top: 0;
+    border-left-color: var(--pf-border);
+  }
+}
+
+@media (max-width: 860px) {
+  .col-8,
+  .col-3,
+  .col-12 {
+    width: 100%;
+    max-width: 100%;
+    float: none;
+    box-sizing: border-box;
+  }
+
+  #main {
+    width: 100% !important;
+    margin-right: 0 !important;
+    float: none !important;
+  }
+
+  .res-cons {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+}
+
+#header {
+  padding-top: 0 !important;
+  text-align: left !important;
+}
+
+#header .col-group {
+  border-bottom: none;
+}
+
+#nav-menu {
+  float: none;
+  margin: 0;
 }
 
 a,
@@ -185,11 +262,15 @@ a:active {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--pf-border);
   color: #fff;
-  padding: 0.4rem 0.75rem;
+  padding: 0.55rem 0.9rem;
+  min-height: 44px;
+  min-width: 44px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.85rem;
   font-family: var(--pf-font-mono);
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #body {
@@ -204,7 +285,8 @@ a:active {
 #main .post,
 .site-hero,
 .resume-page .resume-block,
-#sidebar .widget {
+#sidebar .widget,
+#secondary .widget {
   background: linear-gradient(165deg, var(--pf-surface) 0%, var(--pf-bg-elevated) 100%);
   border: 1px solid var(--pf-border);
   border-radius: var(--pf-radius);
@@ -377,18 +459,114 @@ a:active {
   padding: 0.1em 0.35em;
   border-radius: 4px;
   color: var(--pf-accent-blue);
+  overflow-wrap: anywhere;
 }
 
-#sidebar .widget {
+.post-content pre,
+.post-content pre code {
+  background: var(--pf-bg-elevated);
+  border: 1px solid var(--pf-border);
+  color: var(--pf-text);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.post-content pre {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  line-height: 1.55;
+}
+
+.post-content blockquote {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1rem;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  border-left: 3px solid var(--pf-accent);
+  color: var(--pf-text-muted);
+  background: rgba(56, 189, 248, 0.04);
+  border-radius: 0 8px 8px 0;
+}
+
+.post-content img,
+.post-content video,
+.post-content iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-content .table-scroll,
+.resume-block .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0.75rem 0 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--pf-border);
+}
+
+.post-content .table-scroll table,
+.resume-block .table-scroll table {
+  margin-bottom: 0;
+  min-width: 280px;
+}
+
+/* Dark tables — override Maupassant light table skin */
+.post-content table,
+.resume-block table,
+.skills-table {
+  color: var(--pf-text);
+  background: transparent;
+}
+
+.post-content table tr,
+.resume-block table tr,
+.skills-table tr {
+  background-color: transparent !important;
+  border-top-color: var(--pf-border);
+}
+
+.post-content table tr:nth-child(2n),
+.resume-block table tr:nth-child(2n),
+.skills-table tr:nth-child(2n) {
+  background: rgba(56, 189, 248, 0.04) !important;
+}
+
+.post-content table th,
+.resume-block table th,
+.skills-table th {
+  background: rgba(56, 189, 248, 0.1) !important;
+  color: var(--pf-text) !important;
+  border-color: var(--pf-border) !important;
+  border-bottom-color: var(--pf-border-strong) !important;
+}
+
+.post-content table td,
+.resume-block table td,
+.skills-table td {
+  color: #c5d0de !important;
+  border-color: var(--pf-border) !important;
+}
+
+#nav-menu a.current {
+  border: 1px solid rgba(45, 212, 191, 0.25);
+  border-bottom-color: rgba(45, 212, 191, 0.25);
+  background: rgba(45, 212, 191, 0.08);
+}
+
+#sidebar .widget,
+#secondary .widget {
   padding: 1rem 1.25rem;
   margin-bottom: 1rem;
 }
 
-#sidebar .widget:hover {
+#sidebar .widget:hover,
+#secondary .widget:hover {
   border-color: var(--pf-border-strong);
 }
 
-#sidebar .widget-title {
+#sidebar .widget-title,
+#secondary .widget-title {
   color: var(--pf-text);
   font-size: 0.9rem;
   letter-spacing: 0.04em;
@@ -503,17 +681,30 @@ a:active {
   margin-bottom: 0.5rem;
 }
 
+.skills-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
 .skills-table th {
-  background: rgba(56, 189, 248, 0.06);
   width: 28%;
   font-weight: 600;
-  color: var(--pf-text);
+  vertical-align: top;
 }
 
 .skills-table th,
 .skills-table td {
-  border: 1px solid var(--pf-border);
-  padding: 0.6rem 0.75rem;
+  padding: 0.65rem 0.85rem;
+  line-height: 1.55;
+}
+
+.resume-block ul {
+  padding-left: 1.15rem;
+  line-height: 1.7;
+}
+
+.resume-block li {
+  margin-bottom: 0.45rem;
 }
 
 .project-card {
@@ -556,15 +747,44 @@ a:active {
 }
 
 @media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  #body {
+    padding-top: 1.25rem;
+    padding-bottom: 2rem;
+  }
+
+  #header .header-inner {
+    padding: 0.75rem 0;
+    align-items: flex-start;
+  }
+
+  #logo {
+    font-size: 1.2rem;
+  }
+
+  #header .description {
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
   .nav-toggle {
     display: block;
+    margin-left: auto;
   }
 
   #nav-menu {
     display: none;
     width: 100%;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.35rem;
+    order: 3;
+    padding: 0.5rem 0 0.25rem;
+    border-top: 1px solid var(--pf-border);
+    margin-top: 0.25rem;
   }
 
   #nav-menu.is-open {
@@ -574,22 +794,138 @@ a:active {
   #nav-menu a {
     margin-left: 0;
     display: block;
+    padding: 0.65rem 0.85rem;
+    min-height: 44px;
+    line-height: 1.4;
+    box-sizing: border-box;
   }
 
-  .col-8,
-  .col-3 {
-    width: 100%;
-    float: none;
+  .site-hero h2 {
+    font-size: 1.35rem;
+    line-height: 1.35;
+  }
+
+  .site-hero p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .hero-links a:not(.secondary),
+  .hero-links a.secondary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1rem;
+  }
+
+  #main .post-title,
+  .post-title {
+    font-size: 1.25rem !important;
+    line-height: 1.35;
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .post-content,
+  .post-content p {
+    font-size: 1rem;
+    line-height: 1.75;
   }
 
   #main .post,
   .site-hero,
   .resume-page .resume-block {
-    padding: 1.15rem;
+    padding: 1.1rem 1rem;
+  }
+
+  .resume-page .resume-header h1 {
+    font-size: 1.55rem;
+  }
+
+  .pagination a,
+  .pagination span {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #secondary {
+    display: none;
+  }
+
+  /* Skills table → stacked cards on narrow screens */
+  .skills-table {
+    border: none;
+  }
+
+  .skills-table,
+  .skills-table tbody,
+  .skills-table tr,
+  .skills-table th,
+  .skills-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .resume-block .skills-table tr {
+    margin-bottom: 0.75rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--pf-border) !important;
+    border-radius: 10px;
+    background-color: var(--pf-bg-elevated) !important;
+  }
+
+  .resume-block .skills-table tr:nth-child(2n) {
+    background-color: var(--pf-bg-elevated) !important;
   }
 
   .skills-table th {
-    width: 35%;
+    width: 100%;
+    padding: 0 0 0.35rem;
+    border: none !important;
+    background: transparent !important;
+    color: var(--pf-accent) !important;
+    font-family: var(--pf-font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+  }
+
+  .skills-table td {
+    padding: 0;
+    border: none !important;
+    color: var(--pf-text) !important;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .tag-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .toc-article {
+    float: none;
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: max(0.85rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.85rem, env(safe-area-inset-right, 0px));
+  }
+
+  .site-hero::before {
+    opacity: 0.5;
   }
 }
 
