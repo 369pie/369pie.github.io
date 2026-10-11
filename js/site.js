@@ -4,10 +4,31 @@
 
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("nav-menu");
+  function setNavOpen(open) {
+    if (!nav || !toggle) return;
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
   if (toggle && nav) {
     toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      setNavOpen(!nav.classList.contains("is-open"));
+    });
+
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setNavOpen(false);
+      });
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!nav.classList.contains("is-open")) return;
+      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      setNavOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setNavOpen(false);
     });
   }
 
@@ -31,9 +52,20 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  document
+    .querySelectorAll(".post-content table, .resume-block table:not(.skills-table)")
+    .forEach(function (table) {
+      var parent = table.parentElement;
+      if (parent && parent.classList.contains("table-scroll")) return;
+      var wrap = document.createElement("div");
+      wrap.className = "table-scroll";
+      table.parentNode.insertBefore(wrap, table);
+      wrap.appendChild(table);
+    });
+
   if (!prefersReduced && "IntersectionObserver" in window) {
     var targets = document.querySelectorAll(
-      ".site-hero, #main .post, #sidebar .widget, .resume-page .resume-block"
+      ".site-hero, #main .post, #sidebar .widget, #secondary .widget, .resume-page .resume-block"
     );
     targets.forEach(function (el) {
       el.classList.add("pf-reveal");
