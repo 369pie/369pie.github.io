@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "agent-platform-secondary-dev",
+    "title": "Agent 二次开发不是改 Prompt：OpenClaw / Hermes 工程化清单",
+    "iso_date": "2026-09-28T10:00:00+08:00",
+    "display_date": "2026年9月28日",
+    "category": "技术",
+    "category_path": "%E6%8A%80%E6%9C%AF",
+    "tags": ["agent", "micro"],
+    "excerpt": "二次开发 Agent 框架时，真正决定能否产品化的不是「多几个工具」，而是隔离边界、状态机、可回滚的配置与可观测的调用链。结合 OpenClaw / Hermes 类项目的交付经验，整理一份工程化清单。"
+  },
+  {
+    "slug": "comfyui-workflow-to-production",
+    "title": "ComfyUI 工作流从玩具到生产：编排、缓存与质量闸",
+    "iso_date": "2026-09-15T10:00:00+08:00",
+    "display_date": "2026年9月15日",
+    "category": "技术",
+    "category_path": "%E6%8A%80%E6%9C%AF",
+    "tags": ["aigc", "python"],
+    "excerpt": "ComfyUI 擅长探索，但上线意味着版本化工作流、确定性重试、素材缓存与人工抽检闸口。本文用机制语言说明从 Demo 到日更内容产线的差距在哪里。"
+  },
+  {
+    "slug": "vibe-coding-limits",
+    "title": "Vibe Coding 的边界：什么时候该关掉 AI 自动驾驶",
+    "iso_date": "2026-08-30T10:00:00+08:00",
+    "display_date": "2026年8月30日",
+    "category": "技术",
+    "category_path": "%E6%8A%80%E6%9C%AF",
+    "tags": ["web", "python"],
+    "excerpt": "Vibe Coding 能压缩从 0 到 1 的时间，但权限模型、数据一致性与安全边界不能交给「感觉对了」。用独立产品交付的教训，划分适合 AI 代写的层与必须人审的层。"
+  },
+  {
+    "slug": "llm-observability-cost",
+    "title": "大模型应用的可观测性：把 Token 账单翻译成 SLO",
+    "iso_date": "2026-08-12T10:00:00+08:00",
+    "display_date": "2026年8月12日",
+    "category": "技术",
+    "category_path": "%E6%8A%80%E6%9C%AF",
+    "tags": ["llm", "micro"],
+    "excerpt": "在 Klook 年代做统一监控的经验迁移到 LLM：除了延迟与错误率，还要追踪上下文长度、工具调用拓扑、缓存命中与单次会话成本，否则容量规划永远是拍脑袋。"
+  },
+  {
+    "slug": "ai-landscape-2026-2028",
+    "title": "2026–2028 AI 行业判断：从模型军备到「工作流主权」",
+    "iso_date": "2026-07-20T10:00:00+08:00",
+    "display_date": "2026年7月20日",
+    "category": "随笔",
+    "category_path": "%E9%9A%8F%E7%AC%94",
+    "tags": ["agent", "llm"],
+    "excerpt": "模型能力仍在涨，但企业预算会从「买最强模型」转向「谁掌握工作流与数据飞轮」。给出三个可验证的中期趋势与对应的工程含义。"
+  },
+  {
+    "slug": "open-source-agent-cn-community",
+    "title": "开源 Agent 生态与中文社区：分发、文档与责任边界",
+    "iso_date": "2026-07-05T10:00:00+08:00",
+    "display_date": "2026年7月5日",
+    "category": "技术",
+    "category_path": "%E6%8A%80%E6%9C%AF",
+    "tags": ["agent", "web"],
+    "excerpt": "维护 Hermes 中文社区时的体会：翻译不是终点，关键是场景化示例、可复现环境与清晰的「上游/下游」责任划分，否则社区会沦为二手教程堆叠。"
+  }
+]

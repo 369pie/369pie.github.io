@@ -1,0 +1,43 @@
+<p>Vibe Coding——用自然语言驱动 AI 连续改代码——确实能把独立产品的冷启动时间压到几周甚至几天。wtfti.com 一类高流量 Web 应用能在 AI 辅助下完成全栈交付，已经证明「速度」不是幻觉。但速度换不来<strong>默认可靠</strong>，尤其在用户量上来之后。</p>
+
+<h2 id="适合-vibe-的层">适合 Vibe 的层</h2>
+
+<p>经验上，下列部分交给 AI 连续迭代，ROI 最高：</p>
+
+<ul>
+<li>UI 布局与交互草稿（有设计系统约束时更好）；</li>
+<li>CRUD、表单校验、管理后台；</li>
+<li>一次性脚本、数据迁移、日志清洗；</li>
+<li>测试样例生成（注意要人审断言，而不是盲信）。</li>
+</ul>
+
+<p>这些层的共同点是：<strong>失败代价局部、行为可快速肉眼验证</strong>。</p>
+
+<h2 id="必须关掉自动驾驶的层">必须关掉「自动驾驶」的层</h2>
+
+<p>以下场景我会强制人工设计与结对审查，不让 AI 单独提交：</p>
+
+<ul>
+<li><strong>身份与权限</strong>：会话固定、越权、IDOR；</li>
+<li><strong>金钱与配额</strong>：支付回调、优惠券、积分；</li>
+<li><strong>数据一致性</strong>：库存、订单状态机、幂等键；</li>
+<li><strong>并发与缓存</strong>：热点 key、击穿、分布式锁；</li>
+<li><strong>供应链</strong>：第三方 API 密钥、Webhook 验签。</li>
+</ul>
+
+<p>不是因为 AI 一定写错，而是因为<strong>错误模式太隐蔽</strong>：看起来能跑，压测或 edge case 才爆。</p>
+
+<h2 id="工程纪律">三条工程纪律</h2>
+
+<p><strong>1. 薄入口，厚领域</strong><br>
+Controller 保持愚蠢，把规则收进显式的 domain 函数或状态机。AI 改 Controller 很容易；改散落的 if-else 很难维护。</p>
+
+<p><strong>2. 可观测先于功能堆叠</strong><br>
+新功能上线前先有请求日志、错误聚合、关键业务指标（注册转化、核心 API 成功率）。否则 Vibe 迭代越快，欠账越多。</p>
+
+<p><strong>3. 固定「黄金路径」回归</strong><br>
+选 5–10 条用户主路径，用 Playwright 或 API 测试锁死。AI 改代码后先跑这条链路，比通读 diff 更现实。</p>
+
+<h2 id="与-agent-开发的交叉">与 Agent 开发的交叉</h2>
+
+<p>独立交付产品时，Agent 适合帮你拆任务、写样板；不适合替你做<strong>威胁建模</strong>。把 Vibe Coding 当成「加速打字与搜索」而不是「省略思考」，才能在 7 万日活量级仍然睡得着觉。</p>
